@@ -1,0 +1,34 @@
+{
+    "pipelines": [
+        {
+            "id": "5d4c3e12f4b7e163e3aeca93",
+            "name": "New Issues",
+            "issues": []
+        },
+        {
+            "id": "5d4c3e12f4b7e163e3aeca94",
+            "name": "Icebox",
+            "issues": []
+        },
+        {
+            "id": "5d4c3e12f4b7e163e3aeca95",
+            "name": "Backlog",
+            "issues": []
+        },
+        {
+            "id": "5d4c3e12f4b7e163e3aeca96",
+            "name": "In Progress",
+            "issues": []
+        },
+        {
+            "id": "5d4c3e12f4b7e163e3aeca97",
+            "name": "Review/QA",
+            "issues": []
+        },
+        {
+            "id": "5d4c3e12f4b7e163e3aeca98",
+            "name": "Done",
+            "issues": []
+        }
+    ]
+}

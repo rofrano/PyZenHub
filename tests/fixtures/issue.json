@@ -1,0 +1,19 @@
+{
+    "estimate": {
+        "value": 5
+    },
+    "plus_ones": [],
+    "pipeline": {
+        "name": "Done",
+        "pipeline_id": "57e2f42c86e6ae285942419e",
+        "workspace_id": "57e2f42c86e6ae285942419d"
+    },
+    "pipelines": [
+        {
+            "name": "Done",
+            "pipeline_id": "57e2f42c86e6ae285942419e",
+            "workspace_id": "57e2f42c86e6ae285942419d"
+        }
+    ],
+    "is_epic": false
+}
