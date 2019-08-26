@@ -15,9 +15,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-Module Dependencie
+Module Dependency
 """
-class Dependencie:
+class Dependency:
     """
     Dependencies
     Get Dependencies for a Repository

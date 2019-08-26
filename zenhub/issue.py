@@ -14,16 +14,22 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
-Issue
+ZebHub Issue Module
 
-This class represents only the additional parameters that ZenHub adds to
-Github issues. It does not contain the Github information such as `title`
-or `status`. You would need to combine this with a Github issue to get
-all of the information.
+Part of the PyZenHub package
+"""
+import json
 
-Implements ths following ZenHub REST calls:
+class Issue:
+    """ Issue holds additional attributes that ZenHub adds to Github Issues
+
+    This class represents only the additional parameters that ZenHub adds to
+    Github issues. It does not contain the Github information such as ``title``
+    or ``status``. You would need to combine this with a Github issue to get
+    all of the information.
+
+    Implements ths following ZenHub REST API calls:
 
     Get Issue Data
         ``GET  /p1/repositories/:repo_id/issues/:issue_number``
@@ -31,15 +37,12 @@ Implements ths following ZenHub REST calls:
         ``GET  /p1/repositories/:repo_id/issues/:issue_number/events``
     Move an Issue Between Pipelines
         ``POST /p1/repositories/:repo_id/issues/:issue_number/moves``
+    Move an Issue Between Pipelines in the oldest Workspace
+
     Set Issue Estimate
         ``PUT  /p1/repositories/:repo_id/issues/:issue_number/estimate``
 
-Based on ZenHub API @ https://github.com/ZenHubIO/API
-"""
-import json
-
-class Issue:
-    """ Issue holds additional attributes that ZenHub adds to Issues """
+    """
 
     def __init__(self, issue_data, issue_number, repo):
         self.data = issue_data
@@ -57,11 +60,11 @@ class Issue:
 
     @staticmethod
     def find(issue_number, repo):
-        """ Creates a instance of an Issue given it's issue number
+        """ Get Issue Data
 
         :type issue_number: int
         :param issue_number: The number of the Issue you want to retrieve
-        :type repo: :class:`zenhub.Issue`
+        :type repo: :class:`zenhub.Repository`
         :param repo: The repository containing the Issue
 
         :calls: `GET /p1/repositories/:repo_id/issues/:issue_number <https://github.com/ZenHubIO/API#get-issue-data>`_
@@ -77,7 +80,7 @@ class Issue:
 
     @property
     def repo_id(self):
-        """ Get the repositiry ID
+        """ Get the repository ID
 
         :return: The ID of the Github repository this Issue is in
         :rtype: int
@@ -99,16 +102,17 @@ class Issue:
 
         :return: The value of the estimate in story points
         :rtype: int
-
         """
         return self._estimate.get('value') or 0
 
     @estimate.setter
     def estimate(self, value):
-        """ Creates or updates the estimate with the given value
+        """ Set Issue Estimate
 
         :type value: int
         :param value: the new value of the estimate in Story Points
+
+        :calls: `PUT /p1/repositories/:repo_id/issues/:issue_number/estimate <https://github.com/ZenHubIO/API#set-issue-estimate>`_
 
         """
         self.repo.zenhub.put(
@@ -120,7 +124,7 @@ class Issue:
     def events(self):
         """ Returns issue events, sorted by creation time, most recent first.
 
-        :calls: `GET /p1/repositories/:repo_id/issues/:issue_number <https://github.com/ZenHubIO/API#get-issue-events>`_
+        :calls: `GET /p1/repositories/:repo_id/issues/:issue_number/events <https://github.com/ZenHubIO/API#get-issue-events>`_
 
         :return: Returns the events for this Issue as a dictionary
         :rtype: `dict`
@@ -129,13 +133,14 @@ class Issue:
         return self.repo.zenhub.get(f'/p1/repositories/{self.repo.id}/issues/{self.number}/events')
 
     def move_to(self, pipeline_id, position='top'):
-        """ Moves this Issue to another Pipeline
+        """ Move an Issue Between Pipelines in the oldest Workspace
 
         :type pipeline_id: int
         :param pipeline_id: The ID of the pipeline you want to move the Issue to
-
         :type position: str
         :param position: The position as an int (0, 1, 2) or 'top' or 'bottom'
+
+        :calls: `POST /p1/repositories/:repo_id/issues/:issue_number/moves <https://github.com/ZenHubIO/API#move-an-issue-between-pipelines-in-the-oldest-workspace>`_
 
         """
         return self.repo.zenhub.post(

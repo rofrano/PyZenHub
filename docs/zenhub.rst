@@ -12,6 +12,14 @@ zenhub.board module
    :undoc-members:
    :show-inheritance:
 
+zenhub.dependencie module
+-------------------------
+
+.. automodule:: zenhub.dependencie
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 zenhub.epic module
 ------------------
 
@@ -28,6 +36,14 @@ zenhub.issue module
    :undoc-members:
    :show-inheritance:
 
+zenhub.milestone module
+-----------------------
+
+.. automodule:: zenhub.milestone
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 zenhub.pipeline module
 ----------------------
 
@@ -36,10 +52,26 @@ zenhub.pipeline module
    :undoc-members:
    :show-inheritance:
 
+zenhub.release\_report module
+-----------------------------
+
+.. automodule:: zenhub.release_report
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 zenhub.repository module
 ------------------------
 
 .. automodule:: zenhub.repository
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zenhub.workspace module
+-----------------------
+
+.. automodule:: zenhub.workspace
    :members:
    :undoc-members:
    :show-inheritance:

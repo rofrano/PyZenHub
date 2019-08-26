@@ -52,6 +52,8 @@ class Board:
         :type: :class:`zenhub.Repo`
         :param repo: The ``Repo`` class for this board
 
+        :calls: `GET /p1/repositories/:repo_id/board <https://github.com/ZenHubIO/API#get-epic-data>`_
+
         :return: The Board class that represents the kanban board
         :rtype: :class:`zenhub.Board`
 
