@@ -49,8 +49,9 @@ class Issue:
         self._number = issue_number
         self.repo = repo
         self._estimate = issue_data.get('estimate')
-        self.pipeline = issue_data['pipeline']
+        self.pipeline = issue_data.get('pipeline')
         self.is_epic = issue_data['is_epic']
+        self.position = issue_data.get('position')
 
     def __repr__(self):
         return '<%s %r>' % (type(self).__name__, self.number)
@@ -103,7 +104,10 @@ class Issue:
         :return: The value of the estimate in story points
         :rtype: int
         """
-        return self._estimate.get('value') or 0
+        story_points = 0
+        if self._estimate:
+            story_points = self._estimate['value']
+        return story_points
 
     @estimate.setter
     def estimate(self, value):

@@ -34,6 +34,7 @@ This class represents a single Pipeline on the ZenHub Kanban Board.
 #     }
 
 import json
+from .issue import Issue
 
 class Pipeline:
     """ Represents a Pipeline in a ZenHub Board """
@@ -43,10 +44,25 @@ class Pipeline:
         self.repo = repo
         self.id = data['id']
         self.name = data['name']
-        self.issues = data['issues']
+        self._issues = data['issues']
 
     def __repr__(self):
         return '<%s %r>' % (type(self).__name__, self.id)
 
     def __str__(self):
         return '<%s %r>\n' % (type(self).__name__, self.id) + json.dumps(self.data, indent=4)
+
+    @property
+    def issues(self):
+        """ Returns a list of Issue objects in this Pipeline
+
+        :return: The list of Issues
+        :rtype: list
+        """
+        issue_list = []
+        if self._issues:
+            issue_list = [
+                Issue(issue_data, issue_data['issue_number'], self.repo)
+                for issue_data in self._issues
+            ]
+        return issue_list
